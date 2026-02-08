@@ -5,6 +5,10 @@
 :root {
   --color-neutral-darkest: #000;
   --color-white: #fff;
+  --color-basic-green: #9FBAAE;
+  --color-light-green: #CBDED3;
+  --color-basic-yellow: #F4C550;
+   --color-light-yellow: #FBE9BA;
 }
 
 /* =====================================
