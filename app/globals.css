@@ -3,12 +3,21 @@
 ======================================== */
 
 :root {
-  --color-neutral-darkest: #000;
+  --color-dark: #121417;
   --color-white: #fff;
-  --color-basic-green: #9FBAAE;
-  --color-light-green: #CBDED3;
-  --color-basic-yellow: #F4C550;
-   --color-light-yellow: #FBE9BA;
+  --color-off-white: #f8f8f8;
+  --color-green: #38cd3e;
+  --color-green-muted: #9fbaae;
+  --color-green-light: #cbded3;
+  --color-yellow: #ffc531;
+
+  --color-text: var(--color-dark);
+  --color-text-accent: var(--color-green);
+  --color-background: var(--color-white);
+  --color-background-2: var(--color-off-white);
+  --color-basic-accent: var(--color-green-muted);
+  --color-basic-second: var(--color-green-light);
+  --color-rate: var(--color-yellow);
 }
 
 /* =====================================
@@ -31,12 +40,12 @@ body {
   margin: 0;
   background-color: var(--color-white);
 
-  color: var(--color-neutral-darkest);
-  line-height: 150%;
+  color: var(--color-text);
+  line-height: 1.5;
 
   transition: all 250ms ease;
 
-  &.no-scroll {
+  &.noScroll {
     overflow: hidden;
   }
 }
@@ -128,21 +137,7 @@ textarea:-webkit-autofill:focus {
 ======================================== */
 
 .container {
-  max-width: 375px;
+  width: 1440px;
   margin: 0 auto;
-  padding: 0 20px;
-}
-
-@media only screen and (min-width: 768px) {
-  .container {
-    max-width: 768px;
-    padding: 0 32px;
-  }
-}
-
-@media only screen and (min-width: 1440px) {
-  .container {
-    max-width: 1440px;
-    padding: 0 64px;
-  }
+  padding: 0 64px;
 }
