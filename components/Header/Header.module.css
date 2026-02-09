@@ -1,2 +1,35 @@
 .header {
+  height: 88px;
+  display: flex;
+  align-items: center;
+}
+
+.headerContainer {
+  padding: 0 128px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.navLink {
+  line-height: 1.25;
 }
