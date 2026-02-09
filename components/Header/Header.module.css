@@ -31,5 +31,104 @@
 }
 
 .navLink {
+  position: relative;
   line-height: 1.25;
+
+  transition: color 300ms ease;
+
+  &:hover,
+  &:focus {
+    color: var(--color-basic-accent);
+
+    &::after {
+      transform: translateX(-50%) scale(1);
+    }
+  }
+
+  &:active {
+    color: var(--color-basic-second);
+
+    &::after {
+      background-color: var(--color-basic-second);
+    }
+  }
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-basic-accent);
+  transform: translateX(-50%) scale(0);
+
+  transition:
+    transform 300ms ease,
+    background-color 300ms ease;
+}
+
+.authBtnBox {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.loginBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  background-color: transparent;
+  border: none;
+
+  transition: transform 300ms ease;
+
+  & svg {
+    stroke: var(--color-basic-accent);
+    fill: none;
+  }
+
+  &:hover,
+  &:focus {
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(1);
+  }
+}
+
+.navLink.currentUrl {
+}
+
+.registerBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 14px 39px;
+  background-color: var(--color-text);
+  border-radius: 12px;
+  border: none;
+  color: var(--color-background);
+
+  transition:
+    color 300ms ease,
+    background-color 300ms ease;
+
+  &:hover,
+  &:focus {
+    background-color: var(--color-basic-accent);
+    color: var(--color-text);
+  }
+
+  &:active {
+    background-color: var(--color-basic-second);
+  }
 }

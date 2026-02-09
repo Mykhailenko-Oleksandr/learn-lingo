@@ -1,7 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import css from "./Header.module.css";
 
-export default async function Header() {
+import clsx from "clsx";
+import { usePathname } from "next/navigation";
+
+export default function Header() {
+  const router = usePathname();
+
   return (
     <header className={css.header}>
       <div className={`container ${css.headerContainer}`}>
@@ -16,10 +23,28 @@ export default async function Header() {
           <Link href="/" className={css.navLink}>
             Home
           </Link>
-          <Link href="/teachers" className={css.navLink}>
+          <Link
+            href="/teachers"
+            className={clsx(
+              css.navLink,
+              router === "/teachers" && css.currentUrl,
+            )}
+          >
             Teachers
           </Link>
         </nav>
+
+        <div className={css.authBtnBox}>
+          <button type="button" className={css.loginBtn}>
+            <svg width={20} height={20}>
+              <use href="/icons.svg#log-in"></use>
+            </svg>
+            Log in
+          </button>
+          <button type="button" className={css.registerBtn}>
+            Registration
+          </button>
+        </div>
       </div>
     </header>
   );
