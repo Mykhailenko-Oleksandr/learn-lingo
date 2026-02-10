@@ -65,16 +65,10 @@
 .form {
 }
 
-.input {
-  line-height: 1.375;
-
-  border: 1px solid rgba(18, 20, 23, 0.1);
-  border-radius: 12px;
-  padding: 16px 18px;
+.inputBox {
+  position: relative;
+  display: inline-block;
   width: 100%;
-  outline: none;
-
-  transition: border-color 300ms ease;
 
   &:not(:last-of-type) {
     margin-bottom: 18px;
@@ -83,10 +77,54 @@
   &:last-of-type {
     margin-bottom: 40px;
   }
+}
+
+.input {
+  line-height: 1.375;
+
+  border: 1px solid rgba(18, 20, 23, 0.1);
+  border-radius: 12px;
+  padding: 15px 17px;
+  width: 100%;
+  outline: none;
+
+  transition: border-color 300ms ease;
 
   &:hover,
   &:focus {
     border-color: var(--color-text);
+  }
+}
+
+.inputPassword {
+  padding: 15px 54px 15px 17px;
+}
+
+.errorText {
+  position: absolute;
+  top: 100%;
+  left: 10px;
+  color: red;
+
+  font-size: 12px;
+}
+
+.seePasswordBtn {
+  width: 20px;
+  height: 20px;
+
+  background-color: transparent;
+  border: none;
+
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  padding: 0;
+  transform: translateY(-50%);
+
+  & svg {
+    fill: none;
+    stroke: var(--color-text);
   }
 }
 
