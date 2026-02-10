@@ -5,6 +5,7 @@
 :root {
   --color-dark: #121417;
   --color-white: #fff;
+  --color-grey: #8a8a89;
   --color-off-white: #f8f8f8;
   --color-green: #38cd3e;
   --color-green-muted: #9fbaae;
@@ -18,6 +19,7 @@
   --color-basic-accent: var(--color-green-muted);
   --color-basic-second: var(--color-green-light);
   --color-rate: var(--color-yellow);
+  --color-disable: var(--color-grey);
 }
 
 /* =====================================

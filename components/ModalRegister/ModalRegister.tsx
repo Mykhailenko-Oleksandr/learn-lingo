@@ -1,42 +1,37 @@
-import css from "./ModalLogin.module.css";
-import { MouseEvent, useEffect, useState } from "react";
+import css from "./ModalRegister.module.css";
 import { createPortal } from "react-dom";
+import { MouseEvent, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import clsx from "clsx";
 
 interface FormData {
+  name: string;
   email: string;
   password: string;
 }
 
 const schema = yup
   .object({
+    name: yup.string().min(3).max(60).required(),
     email: yup.string().email().max(60).required(),
     password: yup.string().min(8).max(100).required(),
   })
   .required();
 
-interface ModalLoginProps {
+interface ModalRegisterProps {
   onClose: () => void;
 }
 
-export default function ModalLogin({ onClose }: ModalLoginProps) {
+export default function ModalRegister({ onClose }: ModalRegisterProps) {
   const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<FormData>({
-    mode: "onTouched",
-    resolver: yupResolver(schema),
-  });
-
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
-  };
+  } = useForm({ mode: "onTouched", resolver: yupResolver(schema) });
 
   function handleBackdropClick(e: MouseEvent<HTMLDivElement>) {
     if (e.target === e.currentTarget) onClose();
@@ -56,6 +51,10 @@ export default function ModalLogin({ onClose }: ModalLoginProps) {
     };
   }, [onClose]);
 
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    console.log(data);
+  };
+
   return createPortal(
     <div className={css.backdrop} onClick={handleBackdropClick}>
       <div className={css.modal}>
@@ -69,12 +68,26 @@ export default function ModalLogin({ onClose }: ModalLoginProps) {
             <use href="/icons.svg#close"></use>
           </svg>
         </button>
-        <h2 className={css.title}>Log In</h2>
+        <h2 className={css.title}>Registration</h2>
         <p className={css.text}>
-          Welcome back! Please enter your credentials to access your account and
-          continue your search for an teacher.
+          Thank you for your interest in our platform! In order to register, we
+          need some information. Please provide us with the following
+          information
         </p>
         <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
+          <div className={css.inputBox}>
+            <input
+              type="text"
+              placeholder="Name"
+              className={css.input}
+              {...register("name")}
+            />
+
+            {errors.name?.message && (
+              <span className={css.errorText}>{errors.name?.message}</span>
+            )}
+          </div>
+
           <div className={css.inputBox}>
             <input
               type="email"
@@ -111,7 +124,7 @@ export default function ModalLogin({ onClose }: ModalLoginProps) {
             )}
           </div>
           <button type="submit" className={css.btnSubmit} disabled={!isValid}>
-            Log In
+            Sign Up
           </button>
         </form>
       </div>

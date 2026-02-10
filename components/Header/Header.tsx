@@ -7,6 +7,7 @@ import clsx from "clsx";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import ModalLogin from "../ModalLogin/ModalLogin";
+import ModalRegister from "../ModalRegister/ModalRegister";
 
 export default function Header() {
   const [isLoginModal, setIsLoginModal] = useState(false);
@@ -17,12 +18,8 @@ export default function Header() {
     <>
       <header className={css.header}>
         <div className={`container ${css.headerContainer}`}>
-          <Link
-            href="/"
-            className={css.logo}>
-            <svg
-              width={28}
-              height={28}>
+          <Link href="/" className={css.logo}>
+            <svg width={28} height={28}>
               <use href="/icons.svg#ukraine"></use>
             </svg>
             <span>LearnLingo</span>
@@ -31,7 +28,8 @@ export default function Header() {
           <nav className={css.navigation}>
             <Link
               href="/"
-              className={clsx(css.navLink, router === "/" && css.currentUrl)}>
+              className={clsx(css.navLink, router === "/" && css.currentUrl)}
+            >
               Home
             </Link>
             <Link
@@ -39,7 +37,8 @@ export default function Header() {
               className={clsx(
                 css.navLink,
                 router === "/teachers" && css.currentUrl,
-              )}>
+              )}
+            >
               Teachers
             </Link>
           </nav>
@@ -48,10 +47,9 @@ export default function Header() {
             <button
               type="button"
               className={css.loginBtn}
-              onClick={() => setIsLoginModal(true)}>
-              <svg
-                width={20}
-                height={20}>
+              onClick={() => setIsLoginModal(true)}
+            >
+              <svg width={20} height={20}>
                 <use href="/icons.svg#log-in"></use>
               </svg>
               Log in
@@ -59,7 +57,8 @@ export default function Header() {
             <button
               type="button"
               className={css.registerBtn}
-              onClick={() => setIsRegisterModal(true)}>
+              onClick={() => setIsRegisterModal(true)}
+            >
               Registration
             </button>
           </div>
@@ -67,6 +66,9 @@ export default function Header() {
       </header>
 
       {isLoginModal && <ModalLogin onClose={() => setIsLoginModal(false)} />}
+      {isRegisterModal && (
+        <ModalRegister onClose={() => setIsRegisterModal(false)} />
+      )}
     </>
   );
 }
