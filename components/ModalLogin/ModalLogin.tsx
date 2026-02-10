@@ -59,7 +59,12 @@ export default function ModalLogin({ onClose }: ModalLoginProps) {
   return createPortal(
     <div className={css.backdrop} onClick={handleBackdropClick}>
       <div className={css.modal}>
-        <button type="button" className={css.closeBtn} onClick={onClose}>
+        <button
+          type="button"
+          aria-label="Close modal"
+          className={css.closeBtn}
+          onClick={onClose}
+        >
           <svg width={32} height={32}>
             <use href="/icons.svg#close"></use>
           </svg>
@@ -91,9 +96,11 @@ export default function ModalLogin({ onClose }: ModalLoginProps) {
             />
             <button
               type="button"
+              aria-label="Show password"
               className={css.seePasswordBtn}
-              onClick={() => setShowPassword(true)}
               onMouseDown={() => setShowPassword(true)}
+              onMouseUp={() => setShowPassword(false)}
+              onMouseLeave={() => setShowPassword(false)}
             >
               <svg width={20} height={20}>
                 <use href="/icons.svg#eye-off"></use>

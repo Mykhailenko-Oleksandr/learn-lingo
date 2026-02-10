@@ -125,6 +125,13 @@
   & svg {
     fill: none;
     stroke: var(--color-text);
+
+    transition: transform 300ms ease;
+  }
+
+  &:hover svg,
+  &:focus svg {
+    transform: scale(1.1);
   }
 }
 
