@@ -7,7 +7,6 @@ import { Roboto } from "next/font/google";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -34,14 +33,13 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body className={`${roboto.variable}`}>
         <TanStackProvider>
           <Header />
 
           <main>{children}</main>
 
-          <Footer />
           <Toaster />
           <ReactQueryDevtools initialIsOpen={false} />
         </TanStackProvider>

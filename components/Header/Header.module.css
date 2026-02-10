@@ -54,6 +54,10 @@
   }
 }
 
+.navLink.currentUrl::after {
+  transform: translateX(-50%) scale(1);
+}
+
 .navLink::after {
   content: "";
   position: absolute;
@@ -102,9 +106,6 @@
   &:active {
     transform: scale(1);
   }
-}
-
-.navLink.currentUrl {
 }
 
 .registerBtn {
