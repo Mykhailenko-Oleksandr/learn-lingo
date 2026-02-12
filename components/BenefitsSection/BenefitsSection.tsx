@@ -22,6 +22,9 @@ export default function BenefitsSection() {
             <p className={css.text}>Tutor nationalities</p>
           </li>
         </ul>
+        {/* <svg className={css.borderImg} height={116} width={1440}>
+          <use href="/border.svg"></use>
+        </svg> */}
       </div>
     </section>
   );

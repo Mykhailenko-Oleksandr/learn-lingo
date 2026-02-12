@@ -1,14 +1,48 @@
 .section {
+  padding-top: 24px;
+  padding-bottom: 32px;
 }
 
 .listBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+
+  border: 1.5px dashed var(--color-basic-accent);
+  border-radius: 30px;
+
+  height: 116px;
+}
+
+.borderImg {
 }
 
 .itemBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
 }
 
 .number {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
 }
 
 .text {
+  max-width: 96px;
+
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.02em;
+  color: rgba(18, 20, 23, 0.7);
+}
+
+.itemBox:nth-of-type(3) .text,
+.itemBox:nth-of-type(4) .text {
+  max-width: 74px;
 }

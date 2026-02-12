@@ -40,7 +40,7 @@
       width: 195px;
       height: 40px;
       border-radius: 8px;
-      background-color: var(--color-green-light);
+      background-color: var(--color-basic-second);
       z-index: -1;
     }
   }
@@ -60,7 +60,7 @@
   min-width: 267px;
   padding: 16px;
   border-radius: 12px;
-  background-color: var(--color-green-muted);
+  background-color: var(--color-basic-accent);
 
   font-weight: 700;
   font-size: 18px;
@@ -71,7 +71,7 @@
 
   &:hover,
   &:focus {
-    background-color: var(--color-green-light);
+    background-color: var(--color-basic-second);
   }
 }
 
@@ -79,7 +79,7 @@
   position: relative;
   min-width: 568px;
   min-height: 530px;
-  background-color: var(--color-green-light);
+  background-color: var(--color-basic-second);
   border-radius: 30px;
   overflow: hidden;
 }
