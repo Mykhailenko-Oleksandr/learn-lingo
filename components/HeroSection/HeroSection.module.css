@@ -9,6 +9,7 @@
 }
 
 .contentBox {
+  width: 100%;
   border-radius: 30px;
   background-color: var(--color-background-second);
   padding: 98px 64px;
@@ -75,8 +76,26 @@
 }
 
 .imageBox {
+  position: relative;
   min-width: 568px;
   min-height: 530px;
   background-color: var(--color-green-light);
   border-radius: 30px;
+  overflow: hidden;
+}
+
+.headImg {
+  position: absolute;
+  bottom: 111px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+.laptopImg {
+  position: absolute;
+  bottom: -128px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
 }

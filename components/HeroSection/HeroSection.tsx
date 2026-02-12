@@ -1,6 +1,7 @@
 import Link from "next/link";
 import css from "./HeroSection.module.css";
 import clsx from "clsx";
+import Image from "next/image";
 
 export default function HeroSection() {
   return (
@@ -19,7 +20,22 @@ export default function HeroSection() {
             Get started
           </Link>
         </div>
-        <div className={css.imageBox}></div>
+        <div className={css.imageBox}>
+          <Image
+            src="/images/head@2x.png"
+            alt="Head child"
+            className={css.headImg}
+            width={339}
+            height={339}
+          />
+          <Image
+            src="/images/Mac@2x.png"
+            alt="Laptop"
+            className={css.laptopImg}
+            width={391}
+            height={304}
+          />
+        </div>
       </div>
     </section>
   );
