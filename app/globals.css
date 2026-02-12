@@ -15,7 +15,7 @@
   --color-text: var(--color-dark);
   --color-text-accent: var(--color-green);
   --color-background: var(--color-white);
-  --color-background-2: var(--color-off-white);
+  --color-background-second: var(--color-off-white);
   --color-basic-accent: var(--color-green-muted);
   --color-basic-second: var(--color-green-light);
   --color-rate: var(--color-yellow);
