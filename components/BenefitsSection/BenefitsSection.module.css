@@ -3,6 +3,10 @@
   padding-bottom: 32px;
 }
 
+.wrap {
+  position: relative;
+}
+
 .listBox {
   position: relative;
   display: flex;
@@ -10,13 +14,15 @@
   justify-content: center;
   gap: 100px;
 
-  border: 1.5px dashed var(--color-basic-accent);
+  /* border: 1.5px dashed var(--color-basic-accent); */
   border-radius: 30px;
 
   height: 116px;
 }
 
 .borderImg {
+  position: absolute;
+  inset: 0;
 }
 
 .itemBox {
