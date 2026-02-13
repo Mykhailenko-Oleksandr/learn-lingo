@@ -1,17 +1,11 @@
+import { Levels } from "./levels";
 import { Reviews } from "./review";
 
 export interface Teacher {
   name: string;
   surname: string;
   languages: string[];
-  levels: [
-    | "A1 Beginner"
-    | "A2 Elementary"
-    | "B1 Intermediate"
-    | "B2 Upper-Intermediate"
-    | "C1 Advanced"
-    | "C2 Proficient",
-  ];
+  levels: Levels[];
   rating: number;
   reviews: Reviews[];
   price_per_hour: number;

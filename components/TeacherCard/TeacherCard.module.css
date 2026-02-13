@@ -1,0 +1,86 @@
+.item {
+  display: flex;
+  gap: 48px;
+
+  padding: 24px;
+  background-color: var(--color-background);
+  border-radius: 24px;
+}
+
+.imgBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+
+  width: 120px;
+  height: 120px;
+
+  border-radius: 50%;
+  border: 3px solid var(--color-border-avatar);
+}
+
+.imgBox::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  width: 12px;
+  height: 12px;
+
+  border-radius: 50%;
+  border: 2px solid var(--color-background);
+
+  background-color: var(--color-text-accent);
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.contentBox {
+  flex: 1;
+}
+
+.languagesBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 8px;
+}
+
+.keyBlock {
+  font-weight: 500;
+  color: var(--color-disable);
+}
+
+.languagesList {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.languagesItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.languagesItemIcon {
+  fill: none;
+  stroke: var(--color-text);
+}
+
+.textValue {
+  font-weight: 500;
+}
+
+.line {
+  width: 1px;
+  height: 16px;
+
+  background-color: var(--color-disable);
+}

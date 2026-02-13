@@ -11,6 +11,7 @@
   --color-green-muted: #9fbaae;
   --color-green-light: #cbded3;
   --color-yellow: #ffc531;
+  --color-yellow-light: #fbe9ba;
 
   --color-text: var(--color-dark);
   --color-text-accent: var(--color-green);
@@ -20,6 +21,7 @@
   --color-basic-second: var(--color-green-light);
   --color-rate: var(--color-yellow);
   --color-disable: var(--color-grey);
+  --color-border-avatar: var(--color-yellow-light);
 }
 
 /* =====================================

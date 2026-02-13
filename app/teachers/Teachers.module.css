@@ -1,0 +1,8 @@
+.section {
+  padding: 96px 0;
+  background-color: var(--color-background-second);
+}
+
+.teachersContainer {
+  padding: 0 128px;
+}
