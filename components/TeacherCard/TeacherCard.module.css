@@ -57,6 +57,12 @@
   color: var(--color-disable);
 }
 
+.languagesRightBox {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+}
+
 .languagesList {
   display: flex;
   align-items: center;
@@ -69,13 +75,21 @@
   gap: 8px;
 }
 
-.languagesItemIcon {
+.openBookIcon {
   fill: none;
   stroke: var(--color-text);
 }
 
+.starIcon {
+  fill: var(--color-rate);
+}
+
 .textValue {
   font-weight: 500;
+}
+
+.accentText {
+  color: var(--color-text-accent);
 }
 
 .line {
@@ -83,4 +97,100 @@
   height: 16px;
 
   background-color: var(--color-disable);
+}
+
+.favoriteBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background-color: transparent;
+  padding: 0;
+
+  transition: transform 300ms ease;
+
+  & svg {
+    fill: none;
+    stroke: var(--color-text);
+  }
+
+  &:hover,
+  &:focus {
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(1);
+  }
+}
+
+.teacherName {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1;
+
+  margin-bottom: 32px;
+}
+
+.infoTeacherList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  margin-bottom: 16px;
+}
+
+.infoTeacherItem {
+  display: flex;
+  align-items: center;
+}
+
+.infoTeacherItem:first-of-type .textValue {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+}
+
+.readMoreBtn {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+
+  font-weight: 500;
+  text-decoration: underline;
+
+  margin-bottom: 32px;
+  display: none;
+}
+
+.badgesList {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge {
+  border: 1px solid rgba(18, 20, 23, 0.2);
+  border-radius: 35px;
+  padding: 7px 11px;
+}
+
+.badgeAccent {
+  border-color: var(--color-basic-accent);
+  background-color: var(--color-basic-accent);
+}
+
+.experienceText {
+  margin-bottom: 32px;
+}
+
+.feedbacksList {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  margin-bottom: 32px;
+}
+
+.feedbackBox {
 }
