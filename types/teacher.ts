@@ -1,11 +1,11 @@
-import { Levels } from "./levels";
+import { Level } from "./level";
 import { Review } from "./review";
 
 export interface Teacher {
   name: string;
   surname: string;
   languages: string[];
-  levels: Levels[];
+  levels: Level[];
   rating: number;
   reviews: Review[];
   price_per_hour: number;

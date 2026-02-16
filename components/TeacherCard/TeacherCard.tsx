@@ -4,16 +4,14 @@ import { Teacher } from "@/types/teacher";
 import css from "./TeacherCard.module.css";
 import Image from "next/image";
 import { useId } from "react";
-import FeedbackItem from "../FeedbackItem/FeedbackItem";
 import FeedbacksList from "../FeedbacksList/FeedbacksList";
+import BadgesList from "../BadgesList/BadgesList";
 
 interface TeacherCardProps {
   teacher: Teacher;
 }
 
 export default function TeacherCard({ teacher }: TeacherCardProps) {
-  const baseId = useId();
-
   function handleFavoriteBtn() {
     console.log("ok");
   }
@@ -103,16 +101,7 @@ export default function TeacherCard({ teacher }: TeacherCardProps) {
         )}
 
         {teacher.levels && teacher.levels.length > 0 && (
-          <ul className={css.badgesList}>
-            {teacher.levels.map((level, index) => {
-              const uniqueBadgeId = `${baseId}-${level}-${index}`;
-              return (
-                <li key={uniqueBadgeId} className={css.badge}>
-                  {level}
-                </li>
-              );
-            })}
-          </ul>
+          <BadgesList levels={teacher.levels} />
         )}
       </div>
     </li>

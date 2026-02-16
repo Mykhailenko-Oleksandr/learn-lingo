@@ -1,4 +1,4 @@
-export type Levels =
+export type Level =
   | "A1 Beginner"
   | "A2 Elementary"
   | "B1 Intermediate"

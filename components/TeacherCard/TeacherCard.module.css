@@ -163,23 +163,6 @@
   display: none;
 }
 
-.badgesList {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.badge {
-  border: 1px solid rgba(18, 20, 23, 0.2);
-  border-radius: 35px;
-  padding: 7px 11px;
-}
-
-.badgeAccent {
-  border-color: var(--color-basic-accent);
-  background-color: var(--color-basic-accent);
-}
-
 .experienceText {
   margin-bottom: 32px;
 }
