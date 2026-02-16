@@ -1,6 +1,7 @@
 import css from "./Teachers.module.css";
 import { Teacher } from "@/types/teacher";
 import TeachersList from "@/components/TeachersList/TeachersList";
+import TeacherFilters from "@/components/TeacherFilters/TeacherFilters";
 
 const teacherOne: Teacher[] = [
   {
@@ -85,6 +86,8 @@ export default function Teachers() {
   return (
     <section className={css.section}>
       <div className={`container ${css.teachersContainer}`}>
+        <TeacherFilters />
+
         <TeachersList teachers={teacherOne} />
       </div>
     </section>
