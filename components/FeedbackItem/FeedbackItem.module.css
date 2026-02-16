@@ -1,0 +1,46 @@
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.topBox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.img {
+  border-radius: 50%;
+}
+
+.nameRateBox {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.userName {
+  font-weight: 500;
+  color: var(--color-disable);
+}
+
+.rateBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.starIcon {
+  fill: var(--color-rate);
+}
+
+.rating {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.29;
+}
+
+.comment {
+  font-weight: 500;
+}

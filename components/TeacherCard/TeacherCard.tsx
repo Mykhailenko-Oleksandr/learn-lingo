@@ -4,6 +4,8 @@ import { Teacher } from "@/types/teacher";
 import css from "./TeacherCard.module.css";
 import Image from "next/image";
 import { useId } from "react";
+import FeedbackItem from "../FeedbackItem/FeedbackItem";
+import FeedbacksList from "../FeedbacksList/FeedbacksList";
 
 interface TeacherCardProps {
   teacher: Teacher;
@@ -97,21 +99,7 @@ export default function TeacherCard({ teacher }: TeacherCardProps) {
         <p className={css.experienceText}>{teacher.experience}</p>
 
         {teacher.reviews && teacher.reviews.length > 0 && (
-          <ul className={css.feedbacksList}>
-            {teacher.reviews.map((feedback, index) => {
-              const uniqueFeedbackId = `${baseId}-${feedback.reviewer_name}-${index}`;
-              return (
-                <li key={index} className={css.feedbackBox}>
-                  <div>
-                    <Image
-                      src="/images/default-avatar.webp"
-                      alt="User avatar"
-                    />
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+          <FeedbacksList feedbacks={teacher.reviews} />
         )}
 
         {teacher.levels && teacher.levels.length > 0 && (
