@@ -3,7 +3,7 @@
 import { Teacher } from "@/types/teacher";
 import css from "./TeacherCard.module.css";
 import Image from "next/image";
-import { useId } from "react";
+import { useState } from "react";
 import FeedbacksList from "../FeedbacksList/FeedbacksList";
 import BadgesList from "../BadgesList/BadgesList";
 
@@ -12,6 +12,8 @@ interface TeacherCardProps {
 }
 
 export default function TeacherCard({ teacher }: TeacherCardProps) {
+  const [isOpenReadMore, setIsOpenReadMore] = useState(false);
+
   function handleFavoriteBtn() {
     console.log("ok");
   }
@@ -90,14 +92,25 @@ export default function TeacherCard({ teacher }: TeacherCardProps) {
             <p className={css.textValue}>{teacher.conditions}</p>
           </li>
         </ul>
-        <button type="button" className={css.readMoreBtn}>
-          Read more
-        </button>
 
-        <p className={css.experienceText}>{teacher.experience}</p>
+        {!isOpenReadMore && (
+          <button
+            type="button"
+            className={css.readMoreBtn}
+            onClick={() => setIsOpenReadMore(true)}
+          >
+            Read more
+          </button>
+        )}
 
-        {teacher.reviews && teacher.reviews.length > 0 && (
-          <FeedbacksList feedbacks={teacher.reviews} />
+        {isOpenReadMore && (
+          <>
+            <p className={css.experienceText}>{teacher.experience}</p>
+
+            {teacher.reviews && teacher.reviews.length > 0 && (
+              <FeedbacksList feedbacks={teacher.reviews} />
+            )}
+          </>
         )}
 
         {teacher.levels && teacher.levels.length > 0 && (
