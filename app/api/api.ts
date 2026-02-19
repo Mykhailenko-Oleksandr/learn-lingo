@@ -9,7 +9,6 @@ export type ApiError = AxiosError<{
 }>;
 
 export const api = axios.create({
-  /* Посилання на бекенд */
-  baseURL: "https://",
+  baseURL: "https://learn-lingo-150c6-default-rtdb.firebaseio.com/",
   withCredentials: true,
 });
