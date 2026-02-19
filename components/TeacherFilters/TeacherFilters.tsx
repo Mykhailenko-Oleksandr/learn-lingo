@@ -1,16 +1,17 @@
 "use client";
 
 import css from "./TeacherFilters.module.css";
-import { useState } from "react";
 import CustomSelect from "../CustomSelect/CustomSelect";
-
-const languages = ["French", "English", "German", "Ukrainian", "Polish"];
-const prices = [10, 20, 30, 40];
+import LANGUAGES from "../constants/languages";
+import LEVELS from "../constants/levels";
+import PRICES from "../constants/prices";
 
 export default function TeacherFilters() {
   return (
-    <div>
-      <CustomSelect />
+    <div className={css.box}>
+      <CustomSelect values={LANGUAGES} languages />
+      <CustomSelect values={LEVELS} levels />
+      <CustomSelect values={PRICES} prices />
     </div>
   );
 }

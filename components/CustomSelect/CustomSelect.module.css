@@ -16,6 +16,7 @@
 
 :global(.customSelect__value-container) {
   padding: 14px 18px !important;
+  padding-right: unset !important;
 }
 
 :global(.customSelect__single-value) {
@@ -64,6 +65,10 @@
   font-size: 18px !important;
   line-height: 1.11;
   color: rgba(18, 20, 23, 0.2) !important;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   padding: 4px 0 !important;
 }

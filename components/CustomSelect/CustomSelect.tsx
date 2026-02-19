@@ -14,15 +14,25 @@ const Select = dynamic(() => import("./ClientSelect"), { ssr: false }) as <
 
 interface IOption {
   value: string;
-  label: string;
+  label: string | number;
 }
 
-const languages = ["French", "English", "German", "Ukrainian", "Polish"];
+interface CustomSelectProps {
+  values: string[] | number[];
+  languages?: boolean;
+  prices?: boolean;
+  levels?: boolean;
+}
 
-export default function CustomSelect() {
+export default function CustomSelect({
+  values,
+  languages,
+  prices,
+  levels,
+}: CustomSelectProps) {
   const options: IOption[] = [
-    ...languages.map((language) => {
-      return { value: language, label: language };
+    ...values.map((val) => {
+      return { value: val.toString(), label: val };
     }),
   ];
 
@@ -40,7 +50,14 @@ export default function CustomSelect() {
       value={currentValue}
       options={options}
       isSearchable={false}
-      placeholder="Choose language"
+      styles={{
+        control: (baseStyles) => ({
+          ...baseStyles,
+          ...(languages && { width: "221px" }),
+          ...(levels && { width: "198px" }),
+          ...(prices && { width: "124px" }),
+        }),
+      }}
     />
   );
 }

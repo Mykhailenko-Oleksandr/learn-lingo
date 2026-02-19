@@ -5,12 +5,3 @@ export type Level =
   | "B2 Upper-Intermediate"
   | "C1 Advanced"
   | "C2 Proficient";
-
-export const Levels: Level[] = [
-  "A1 Beginner",
-  "A2 Elementary",
-  "B1 Intermediate",
-  "B2 Upper-Intermediate",
-  "C1 Advanced",
-  "C2 Proficient",
-];
