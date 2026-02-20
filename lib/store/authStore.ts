@@ -1,4 +1,4 @@
-import { User } from "@/types/user";
+import { User } from "firebase/auth";
 import { create } from "zustand";
 
 type AuthStore = {

@@ -5,6 +5,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import clsx from "clsx";
+import { loginUser } from "@/lib/api/clientApi";
+import { useAuthStore } from "@/lib/store/authStore";
 
 interface FormData {
   email: string;
@@ -24,6 +26,7 @@ interface ModalLoginProps {
 
 export default function ModalLogin({ onClose }: ModalLoginProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const setUser = useAuthStore((state) => state.setUser);
 
   const {
     register,
@@ -34,8 +37,15 @@ export default function ModalLogin({ onClose }: ModalLoginProps) {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    try {
+      const user = await loginUser(data.email, data.password);
+      console.log("User login:", user);
+      setUser(user);
+      onClose();
+    } catch (error: unknown) {
+      console.log("Login error");
+    }
   };
 
   function handleBackdropClick(e: MouseEvent<HTMLDivElement>) {

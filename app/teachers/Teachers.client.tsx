@@ -7,14 +7,11 @@ import TeachersList from "@/components/TeachersList/TeachersList";
 import { getAllData } from "@/lib/api/clientApi";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { useAuthStore } from "@/lib/store/authStore";
 
 export default function TeachersClient() {
   const [languagesFilter, setLanguagesFilter] = useState<string | null>(null);
   const [levelsFilter, setLevelsFilter] = useState<string | null>(null);
   const [prisesFilter, setPricesFilter] = useState<string | null>(null);
-  const { user, isAuthenticated } = useAuthStore();
-  console.log(user, isAuthenticated);
 
   const {
     data: teachers,

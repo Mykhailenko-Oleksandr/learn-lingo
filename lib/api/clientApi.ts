@@ -6,6 +6,7 @@ import { v4 as uuid } from "uuid";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
   updateProfile,
 } from "firebase/auth";
 
@@ -51,4 +52,8 @@ export async function loginUser(email: string, password: string) {
     password,
   );
   return userCredential.user;
+}
+
+export async function logout() {
+  await signOut(auth);
 }

@@ -58,12 +58,7 @@ export default function ModalRegister({ onClose }: ModalRegisterProps) {
     try {
       const user = await registerUser(data.email, data.password, data.name);
       console.log("User registered:", user);
-      setUser({
-        id: user.uid,
-        email: user.email!,
-        userName: user.displayName!,
-        refreshToken: user.refreshToken,
-      });
+      setUser(user);
       onClose();
     } catch (error: unknown) {
       console.error("Registration error");

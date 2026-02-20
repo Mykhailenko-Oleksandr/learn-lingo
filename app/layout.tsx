@@ -7,7 +7,7 @@ import { Roboto } from "next/font/google";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import Header from "@/components/Header/Header";
-import { initAuthListener } from "@/services/initAuth";
+import AuthProvider from "@/components/AuthProvider/AuthProvider";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -33,17 +33,18 @@ export default function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  initAuthListener();
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body className={`${roboto.variable}`}>
         <TanStackProvider>
-          <Header />
+          <AuthProvider>
+            <Header />
 
-          <main>{children}</main>
+            <main>{children}</main>
 
-          <Toaster />
-          <ReactQueryDevtools initialIsOpen={false} />
+            <Toaster />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </AuthProvider>
         </TanStackProvider>
       </body>
     </html>

@@ -9,12 +9,18 @@ import { useState } from "react";
 import ModalLogin from "../ModalLogin/ModalLogin";
 import ModalRegister from "../ModalRegister/ModalRegister";
 import { useAuthStore } from "@/lib/store/authStore";
+import { logout } from "@/lib/api/clientApi";
 
 export default function Header() {
   const [isLoginModal, setIsLoginModal] = useState(false);
   const [isRegisterModal, setIsRegisterModal] = useState(false);
-  const { user, isAuthenticated } = useAuthStore();
+  const { user, isAuthenticated, clearIsAuthenticated } = useAuthStore();
   const router = usePathname();
+
+  async function logoutUser() {
+    await logout();
+    clearIsAuthenticated();
+  }
 
   return (
     <>
@@ -43,6 +49,17 @@ export default function Header() {
             >
               Teachers
             </Link>
+            {isAuthenticated && user && (
+              <Link
+                href="/favorites"
+                className={clsx(
+                  css.navLink,
+                  router === "/favorites" && css.currentUrl,
+                )}
+              >
+                Favorites
+              </Link>
+            )}
           </nav>
 
           {!isAuthenticated ? (
@@ -69,7 +86,7 @@ export default function Header() {
             <button
               type="button"
               className={css.registerBtn}
-              onClick={() => {}}
+              onClick={logoutUser}
             >
               Log out
             </button>
