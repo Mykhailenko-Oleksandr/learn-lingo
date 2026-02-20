@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 import FeedbacksList from "../FeedbacksList/FeedbacksList";
 import BadgesList from "../BadgesList/BadgesList";
+import { useFavoriteTeachers } from "@/lib/store/teachersFavoriteStore";
 
 interface TeacherCardProps {
   teacher: Teacher;
@@ -13,9 +14,17 @@ interface TeacherCardProps {
 
 export default function TeacherCard({ teacher }: TeacherCardProps) {
   const [isOpenReadMore, setIsOpenReadMore] = useState(false);
+  const { favoriteTeachers, setFavoriteTeachers, removeFavoriteTeachers } =
+    useFavoriteTeachers();
 
   function handleFavoriteBtn() {
-    console.log("ok");
+    if (teacher.id) {
+      if (favoriteTeachers.includes(teacher.id)) {
+        removeFavoriteTeachers(teacher.id);
+      } else {
+        setFavoriteTeachers(teacher.id);
+      }
+    }
   }
 
   return (
@@ -35,7 +44,10 @@ export default function TeacherCard({ teacher }: TeacherCardProps) {
           <div className={css.languagesRightBox}>
             <ul className={css.languagesList}>
               <li className={css.languagesItem}>
-                <svg width={16} height={16} className={css.openBookIcon}>
+                <svg
+                  width={16}
+                  height={16}
+                  className={css.openBookIcon}>
                   <use href="/icons.svg#book-open"></use>
                 </svg>
                 <p className={css.textValue}>Lessons online</p>
@@ -48,7 +60,10 @@ export default function TeacherCard({ teacher }: TeacherCardProps) {
               </li>
               <li className={css.line}></li>
               <li className={css.languagesItem}>
-                <svg width={16} height={16} className={css.starIcon}>
+                <svg
+                  width={16}
+                  height={16}
+                  className={css.starIcon}>
                   <use href="/icons.svg#star"></use>
                 </svg>
                 <p className={css.textValue}>Rating: {teacher.rating}</p>
@@ -67,9 +82,10 @@ export default function TeacherCard({ teacher }: TeacherCardProps) {
               type="button"
               className={css.favoriteBtn}
               onClick={handleFavoriteBtn}
-              aria-label="Add favorite list teacher"
-            >
-              <svg width={26} height={26}>
+              aria-label="Add favorite list teacher">
+              <svg
+                width={26}
+                height={26}>
                 <use href="/icons.svg#heart"></use>
               </svg>
             </button>
@@ -97,8 +113,7 @@ export default function TeacherCard({ teacher }: TeacherCardProps) {
           <button
             type="button"
             className={css.readMoreBtn}
-            onClick={() => setIsOpenReadMore(true)}
-          >
+            onClick={() => setIsOpenReadMore(true)}>
             Read more
           </button>
         )}

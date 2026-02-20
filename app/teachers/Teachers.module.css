@@ -1,8 +1,33 @@
 .section {
-  padding: 8px 0 96px;
+  padding: 32px 0 96px;
   background-color: var(--color-background-second);
 }
 
 .teachersContainer {
   padding: 0 128px;
+}
+
+.loadMoreBtn {
+  display: block;
+  margin: 0 auto;
+  margin-top: 64px;
+  border: none;
+  background-color: var(--color-green-muted);
+  border-radius: 12px;
+  padding: 16px 48px;
+
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.56;
+
+  transition: background-color 300ms ease;
+
+  &:hover,
+  &:focus {
+    background-color: var(--color-basic-second);
+  }
+
+  &:active {
+    background-color: var(--color-green-muted);
+  }
 }

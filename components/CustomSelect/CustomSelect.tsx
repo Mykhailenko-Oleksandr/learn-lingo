@@ -22,7 +22,7 @@ interface CustomSelectProps {
   languages?: boolean;
   prices?: boolean;
   levels?: boolean;
-  onChange: () => void;
+  onChange: (value: string) => void;
 }
 
 export default function CustomSelect({
@@ -38,29 +38,36 @@ export default function CustomSelect({
     }),
   ];
 
-  const [currentValue, setCurrentValue] = useState<IOption | null>(options[0]);
+  const [currentValue, setCurrentValue] = useState<IOption | null>(null);
 
   function changeLanguage(newValue: SingleValue<IOption>) {
     setCurrentValue(newValue);
-    onChange();
+
+    if (currentValue) onChange(currentValue.value);
   }
 
   return (
-    <Select<IOption>
-      className={css.customSelectBox}
-      classNamePrefix="customSelect"
-      onChange={changeLanguage}
-      value={currentValue}
-      options={options}
-      isSearchable={false}
-      styles={{
-        control: (baseStyles) => ({
-          ...baseStyles,
-          ...(languages && { width: "221px" }),
-          ...(levels && { width: "198px" }),
-          ...(prices && { width: "124px" }),
-        }),
-      }}
-    />
+    <label className={css.label}>
+      {languages && "Languages"}
+      {levels && "Level of knowledge"}
+      {prices && "Price"}
+      <Select<IOption>
+        className={css.customSelectBox}
+        classNamePrefix="customSelect"
+        onChange={changeLanguage}
+        value={currentValue}
+        options={options}
+        isSearchable={false}
+        placeholder={options[0].value}
+        styles={{
+          control: (baseStyles) => ({
+            ...baseStyles,
+            ...(languages && { width: "221px" }),
+            ...(levels && { width: "198px" }),
+            ...(prices && { width: "124px" }),
+          }),
+        }}
+      />
+    </label>
   );
 }

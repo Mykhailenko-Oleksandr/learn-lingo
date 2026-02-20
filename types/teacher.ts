@@ -2,6 +2,7 @@ import { Level } from "./level";
 import { Review } from "./review";
 
 export interface Teacher {
+  id?: string;
   name: string;
   surname: string;
   languages: string[];
