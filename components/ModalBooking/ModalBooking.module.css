@@ -1,0 +1,56 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  max-width: 566px;
+  margin: 0 auto;
+  padding: 64px;
+  background-color: var(--color-background);
+  border-radius: 30px;
+}
+
+.closeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  background-color: transparent;
+  border: none;
+
+  transition: transform 600ms ease;
+
+  & svg {
+    stroke: var(--color-text);
+  }
+
+  &:hover {
+    transform: rotate(90deg) scale(1.2);
+  }
+}
+
+.title {
+  align-self: start;
+
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}

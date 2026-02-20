@@ -1,5 +1,6 @@
 "use client";
 
+import Button from "@/components/Button/Button";
 import css from "./Teachers.module.css";
 import TeacherFilters from "@/components/TeacherFilters/TeacherFilters";
 import TeachersList from "@/components/TeachersList/TeachersList";
@@ -37,11 +38,7 @@ export default function TeachersClient() {
 
         {teachers && <TeachersList teachers={teachers} />}
 
-        <button
-          type="button"
-          className={css.loadMoreBtn}>
-          Load more
-        </button>
+        <Button text="Load More" onClick={() => {}} />
       </div>
     </section>
   );
