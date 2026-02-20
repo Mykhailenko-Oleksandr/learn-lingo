@@ -4,21 +4,15 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import TeachersClient from "./Teachers.client";
+import { getAllData } from "@/lib/api/clientApi";
 
 export default async function Teachers() {
   const queryClient = new QueryClient();
 
-  // await queryClient.prefetchInfiniteQuery({
-  //   queryKey: ["tools", search, []],
-  //   queryFn: ({ pageParam = 1 }) =>
-  //     fetchTools({
-  //       page: pageParam,
-  //       perPage: 16,
-  //       search,
-  //       categories: [],
-  //     }),
-  //   initialPageParam: 1,
-  // });
+  await queryClient.prefetchQuery({
+    queryKey: ["teachers"],
+    queryFn: getAllData,
+  });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

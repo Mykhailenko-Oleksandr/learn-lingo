@@ -22,6 +22,7 @@ interface CustomSelectProps {
   languages?: boolean;
   prices?: boolean;
   levels?: boolean;
+  onChange: () => void;
 }
 
 export default function CustomSelect({
@@ -29,6 +30,7 @@ export default function CustomSelect({
   languages,
   prices,
   levels,
+  onChange,
 }: CustomSelectProps) {
   const options: IOption[] = [
     ...values.map((val) => {
@@ -40,6 +42,7 @@ export default function CustomSelect({
 
   function changeLanguage(newValue: SingleValue<IOption>) {
     setCurrentValue(newValue);
+    onChange();
   }
 
   return (

@@ -1,21 +1,9 @@
+import { get, ref } from "firebase/database";
 import { nextServer } from "./api";
+import { db } from "../firebase";
+import { Teacher } from "@/types/teacher";
 
-// export async function sample(id: string) {
-//   const res = await nextServer.get<{a: string}>(`/sample/${id}`);
-//   return res.data;
-// }
-
-// import { getDatabase, ref, child, get } from "firebase/database";
-
-// const dbRef = ref(getDatabase());
-// get(child(dbRef, `teachers/1`))
-//   .then((snapshot) => {
-//     if (snapshot.exists()) {
-//       console.log(snapshot.val());
-//     } else {
-//       console.log("No data available");
-//     }
-//   })
-//   .catch((error) => {
-//     console.error(error);
-//   });
+export async function getAllData(): Promise<Teacher[]> {
+  const snapshot = await get(ref(db));
+  return snapshot.exists() ? snapshot.val() : [];
+}
