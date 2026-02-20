@@ -5,6 +5,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import clsx from "clsx";
+import { registerUser } from "@/lib/api/clientApi";
+import { useAuthStore } from "@/lib/store/authStore";
 
 interface FormData {
   name: string;
@@ -26,6 +28,7 @@ interface ModalRegisterProps {
 
 export default function ModalRegister({ onClose }: ModalRegisterProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const { setUser } = useAuthStore();
 
   const {
     register,
@@ -51,8 +54,20 @@ export default function ModalRegister({ onClose }: ModalRegisterProps) {
     };
   }, [onClose]);
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    try {
+      const user = await registerUser(data.email, data.password, data.name);
+      console.log("User registered:", user);
+      setUser({
+        id: user.uid,
+        email: user.email!,
+        userName: user.displayName!,
+        refreshToken: user.refreshToken,
+      });
+      onClose();
+    } catch (error: unknown) {
+      console.error("Registration error");
+    }
   };
 
   return createPortal(

@@ -8,10 +8,12 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import ModalLogin from "../ModalLogin/ModalLogin";
 import ModalRegister from "../ModalRegister/ModalRegister";
+import { useAuthStore } from "@/lib/store/authStore";
 
 export default function Header() {
   const [isLoginModal, setIsLoginModal] = useState(false);
   const [isRegisterModal, setIsRegisterModal] = useState(false);
+  const { user, isAuthenticated } = useAuthStore();
   const router = usePathname();
 
   return (
@@ -43,25 +45,35 @@ export default function Header() {
             </Link>
           </nav>
 
-          <div className={css.authBtnBox}>
-            <button
-              type="button"
-              className={css.loginBtn}
-              onClick={() => setIsLoginModal(true)}
-            >
-              <svg width={20} height={20}>
-                <use href="/icons.svg#log-in"></use>
-              </svg>
-              Log in
-            </button>
+          {!isAuthenticated ? (
+            <div className={css.authBtnBox}>
+              <button
+                type="button"
+                className={css.loginBtn}
+                onClick={() => setIsLoginModal(true)}
+              >
+                <svg width={20} height={20}>
+                  <use href="/icons.svg#log-in"></use>
+                </svg>
+                Log in
+              </button>
+              <button
+                type="button"
+                className={css.registerBtn}
+                onClick={() => setIsRegisterModal(true)}
+              >
+                Registration
+              </button>
+            </div>
+          ) : (
             <button
               type="button"
               className={css.registerBtn}
-              onClick={() => setIsRegisterModal(true)}
+              onClick={() => {}}
             >
-              Registration
+              Log out
             </button>
-          </div>
+          )}
         </div>
       </header>
 

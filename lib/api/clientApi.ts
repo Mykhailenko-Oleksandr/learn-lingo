@@ -1,8 +1,13 @@
 import { get, ref } from "firebase/database";
 import { nextServer } from "./api";
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
 import { Teacher } from "@/types/teacher";
 import { v4 as uuid } from "uuid";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 
 export async function getAllData(): Promise<Teacher[]> {
   const snapshot = await get(ref(db));
@@ -21,4 +26,29 @@ export async function getAllData(): Promise<Teacher[]> {
     id,
     ...(teacher as Teacher),
   }));
+}
+
+export async function registerUser(
+  email: string,
+  password: string,
+  name: string,
+) {
+  const userCredential = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password,
+  );
+
+  await updateProfile(userCredential.user, { displayName: name });
+
+  return userCredential.user;
+}
+
+export async function loginUser(email: string, password: string) {
+  const userCredential = await signInWithEmailAndPassword(
+    auth,
+    email,
+    password,
+  );
+  return userCredential.user;
 }
