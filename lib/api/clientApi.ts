@@ -1,8 +1,14 @@
-import { get, ref } from "firebase/database";
+import {
+  get,
+  limitToFirst,
+  orderByKey,
+  query,
+  ref,
+  startAfter,
+} from "firebase/database";
 import { nextServer } from "./api";
 import { auth, db } from "../firebase";
 import { Teacher } from "@/types/teacher";
-import { v4 as uuid } from "uuid";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -10,18 +16,29 @@ import {
   updateProfile,
 } from "firebase/auth";
 
-export async function getAllData(): Promise<Teacher[]> {
-  const snapshot = await get(ref(db));
+export async function getTeachers(limitCount = 4, lastKey?: string) {
+  let teachersQuery;
+
+  if (lastKey) {
+    teachersQuery = query(
+      ref(db, "teachers"),
+      orderByKey(),
+      startAfter(lastKey),
+      limitToFirst(limitCount),
+    );
+  } else {
+    teachersQuery = query(
+      ref(db, "teachers"),
+      orderByKey(),
+      limitToFirst(limitCount),
+    );
+  }
+
+  const snapshot = await get(teachersQuery);
 
   if (!snapshot.exists()) return [];
 
   const data = snapshot.val();
-  if (Array.isArray(data)) {
-    return data.map((teacher) => ({
-      id: uuid(),
-      ...(teacher as Teacher),
-    }));
-  }
 
   return Object.entries(data).map(([id, teacher]) => ({
     id,

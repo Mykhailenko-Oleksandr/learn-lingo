@@ -4,14 +4,15 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import TeachersClient from "./Teachers.client";
-import { getAllData } from "@/lib/api/clientApi";
+import { getTeachers } from "@/lib/api/clientApi";
 
 export default async function Teachers() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery({
+  await queryClient.prefetchInfiniteQuery({
     queryKey: ["teachers"],
-    queryFn: getAllData,
+    queryFn: ({ pageParam }) => getTeachers(4, pageParam),
+    initialPageParam: undefined,
   });
 
   return (

@@ -4,26 +4,26 @@ import Button from "@/components/Button/Button";
 import css from "./Teachers.module.css";
 import TeacherFilters from "@/components/TeacherFilters/TeacherFilters";
 import TeachersList from "@/components/TeachersList/TeachersList";
-import { getAllData } from "@/lib/api/clientApi";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { getTeachers } from "@/lib/api/clientApi";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { Teacher } from "@/types/teacher";
 
 export default function TeachersClient() {
   const [languagesFilter, setLanguagesFilter] = useState<string | null>(null);
   const [levelsFilter, setLevelsFilter] = useState<string | null>(null);
   const [prisesFilter, setPricesFilter] = useState<string | null>(null);
 
-  const {
-    data: teachers,
-    isError,
-    isSuccess,
-  } = useQuery({
+  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ["teachers"],
-    queryFn: getAllData,
-    placeholderData: keepPreviousData,
-    refetchOnMount: false,
+    queryFn: ({ pageParam }: { pageParam?: string }) =>
+      getTeachers(4, pageParam),
+    initialPageParam: undefined as string | undefined,
+    getNextPageParam: (lastPage) =>
+      lastPage.length ? lastPage[lastPage.length - 1].id : undefined,
   });
-  // console.log(teachers);
+
+  const teachers: Teacher[] = data?.pages.flatMap((page) => page) ?? [];
 
   return (
     <section className={css.section}>
@@ -34,9 +34,11 @@ export default function TeachersClient() {
           changePrice={(value) => setPricesFilter(value)}
         />
 
-        {teachers && <TeachersList teachers={teachers} />}
+        {teachers && teachers.length > 0 && (
+          <TeachersList teachers={teachers} />
+        )}
 
-        <Button text="Load More" onClick={() => {}} />
+        {hasNextPage && <Button text="Load More" onClick={fetchNextPage} />}
       </div>
     </section>
   );
