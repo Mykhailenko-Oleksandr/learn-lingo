@@ -12,7 +12,7 @@ import { Teacher } from "@/types/teacher";
 export default function TeachersClient() {
   const [languagesFilter, setLanguagesFilter] = useState<string | null>(null);
   const [levelsFilter, setLevelsFilter] = useState<string | null>(null);
-  const [prisesFilter, setPricesFilter] = useState<string | null>(null);
+  const [pricesFilter, setPricesFilter] = useState<string | null>(null);
 
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: ["teachers"],

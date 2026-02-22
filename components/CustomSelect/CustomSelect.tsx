@@ -43,7 +43,7 @@ export default function CustomSelect({
   function changeLanguage(newValue: SingleValue<IOption>) {
     setCurrentValue(newValue);
 
-    if (currentValue) onChange(currentValue.value);
+    if (newValue) onChange(newValue.value);
   }
 
   return (
