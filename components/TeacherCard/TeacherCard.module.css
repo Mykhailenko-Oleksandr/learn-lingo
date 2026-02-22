@@ -123,6 +123,11 @@
   &:active {
     transform: scale(1);
   }
+
+  &.favorite svg {
+    fill: var(--color-basic-accent);
+    stroke: var(--color-basic-accent);
+  }
 }
 
 .teacherName {

@@ -1,0 +1,13 @@
+.section {
+  padding: 32px 0 96px;
+  background-color: var(--color-background-second);
+}
+
+.teachersContainer {
+  padding: 0 128px;
+}
+
+.text {
+  font-size: large;
+  text-align: center;
+}

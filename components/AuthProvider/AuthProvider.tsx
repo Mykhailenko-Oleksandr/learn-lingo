@@ -5,6 +5,8 @@ import { useAuthStore } from "@/lib/store/authStore";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
+import { getUserFavorites } from "@/lib/api/clientApi";
+import { useFavoriteTeachers } from "@/lib/store/teachersFavoriteStore";
 
 type Props = {
   children: React.ReactNode;
@@ -16,11 +18,14 @@ export default function AuthProvider({ children }: Props) {
     (state) => state.clearIsAuthenticated,
   );
   const [isLoading, setIsLoading] = useState(true);
+  const setFavorites = useFavoriteTeachers((state) => state.setFavorites);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         setUser(user);
+        const favoriteIds = await getUserFavorites(user.uid);
+        setFavorites(favoriteIds);
       } else {
         clearIsAuthenticated();
       }
@@ -28,7 +33,7 @@ export default function AuthProvider({ children }: Props) {
     });
 
     return () => unsubscribe();
-  }, [setUser, clearIsAuthenticated]);
+  }, [setUser, clearIsAuthenticated, setFavorites]);
 
   if (isLoading) {
     return <Loader />;

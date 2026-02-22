@@ -6,6 +6,8 @@ import {
   orderByKey,
   query,
   ref,
+  remove,
+  set,
   startAfter,
 } from "firebase/database";
 import { nextServer } from "./api";
@@ -91,4 +93,20 @@ export async function loginUser(email: string, password: string) {
 
 export async function logout() {
   await signOut(auth);
+}
+
+export async function addFavorite(userId: string, teacherId: string) {
+  await set(ref(db, `users/${userId}/favorites/${teacherId}`), true);
+}
+
+export async function removeFavorite(userId: string, teacherId: string) {
+  await remove(ref(db, `users/${userId}/favorites/${teacherId}`));
+}
+
+export async function getUserFavorites(userId: string) {
+  const snapshot = await get(ref(db, `users/${userId}/favorites`));
+
+  if (!snapshot.exists()) return [];
+
+  return Object.keys(snapshot.val());
 }

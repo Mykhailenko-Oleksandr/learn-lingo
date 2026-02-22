@@ -9,6 +9,10 @@ import BadgesList from "../BadgesList/BadgesList";
 import { useFavoriteTeachers } from "@/lib/store/teachersFavoriteStore";
 import Button from "../Button/Button";
 import ModalBooking from "../ModalBooking/ModalBooking";
+import { useAuthStore } from "@/lib/store/authStore";
+import toast from "react-hot-toast";
+import { addFavorite, removeFavorite } from "@/lib/api/clientApi";
+import clsx from "clsx";
 
 interface TeacherCardProps {
   teacher: Teacher;
@@ -16,16 +20,27 @@ interface TeacherCardProps {
 
 export default function TeacherCard({ teacher }: TeacherCardProps) {
   const [isOpenReadMore, setIsOpenReadMore] = useState(false);
-  const { favoriteTeachers, setFavoriteTeachers, removeFavoriteTeachers } =
-    useFavoriteTeachers();
   const [isModalBooking, setIsModalBooking] = useState(false);
+  const { isAuthenticated, user } = useAuthStore();
+  const isFavorite = useFavoriteTeachers((state) =>
+    state.favoriteTeachers.includes(teacher.id!),
+  );
+  const { removeFavoriteStore, addFavoriteStore } = useFavoriteTeachers();
+  console.log(isFavorite);
 
-  function handleFavoriteBtn() {
-    if (teacher.id) {
-      if (favoriteTeachers.includes(teacher.id)) {
-        removeFavoriteTeachers(teacher.id);
+  async function handleFavoriteBtn() {
+    if (!isAuthenticated) {
+      toast.error("Available only to authorized users");
+      return;
+    }
+
+    if (teacher.id && user) {
+      if (isFavorite) {
+        await removeFavorite(user.uid, teacher.id);
+        removeFavoriteStore(teacher.id);
       } else {
-        setFavoriteTeachers(teacher.id);
+        await addFavorite(user.uid, teacher.id);
+        addFavoriteStore(teacher.id);
       }
     }
   }
@@ -78,7 +93,7 @@ export default function TeacherCard({ teacher }: TeacherCardProps) {
               </ul>
               <button
                 type="button"
-                className={css.favoriteBtn}
+                className={clsx(css.favoriteBtn, isFavorite && css.favorite)}
                 onClick={handleFavoriteBtn}
                 aria-label="Add favorite list teacher"
               >
