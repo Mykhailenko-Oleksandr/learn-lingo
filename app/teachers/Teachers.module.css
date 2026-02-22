@@ -31,3 +31,8 @@
     background-color: var(--color-green-muted);
   }
 }
+
+.text {
+  font-size: large;
+  text-align: center;
+}

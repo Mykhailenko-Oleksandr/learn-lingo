@@ -1,6 +1,8 @@
 import {
+  endAt,
   get,
   limitToFirst,
+  orderByChild,
   orderByKey,
   query,
   ref,
@@ -16,29 +18,45 @@ import {
   updateProfile,
 } from "firebase/auth";
 
-export async function getTeachers(limitCount = 4, lastKey?: string) {
+export async function getTeachers(
+  limitCount = 4,
+  lastValue?: number | string,
+  priceFilter?: string | null,
+) {
   let teachersQuery;
 
-  if (lastKey) {
-    teachersQuery = query(
-      ref(db, "teachers"),
-      orderByKey(),
-      startAfter(lastKey),
-      limitToFirst(limitCount),
-    );
+  if (priceFilter) {
+    const price = Number(priceFilter);
+
+    teachersQuery = lastValue
+      ? query(
+          ref(db, "teachers"),
+          orderByChild("price_per_hour"),
+          endAt(price),
+          startAfter(lastValue),
+          limitToFirst(limitCount),
+        )
+      : query(
+          ref(db, "teachers"),
+          orderByChild("price_per_hour"),
+          endAt(price),
+          limitToFirst(limitCount),
+        );
   } else {
-    teachersQuery = query(
-      ref(db, "teachers"),
-      orderByKey(),
-      limitToFirst(limitCount),
-    );
+    teachersQuery = lastValue
+      ? query(
+          ref(db, "teachers"),
+          orderByKey(),
+          startAfter(lastValue),
+          limitToFirst(limitCount),
+        )
+      : query(ref(db, "teachers"), orderByKey(), limitToFirst(limitCount));
   }
 
   const snapshot = await get(teachersQuery);
-
   if (!snapshot.exists()) return [];
 
-  const data = snapshot.val();
+  const data = snapshot.val() ?? {};
 
   return Object.entries(data).map(([id, teacher]) => ({
     id,
