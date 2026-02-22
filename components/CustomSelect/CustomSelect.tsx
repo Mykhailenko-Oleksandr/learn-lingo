@@ -2,7 +2,7 @@
 
 import css from "./CustomSelect.module.css";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Props as SelectProps, SingleValue } from "react-select";
 
 const Select = dynamic(() => import("./ClientSelect"), { ssr: false }) as <
@@ -23,6 +23,7 @@ interface CustomSelectProps {
   prices?: boolean;
   levels?: boolean;
   onChange: (value: string) => void;
+  value?: string | null;
 }
 
 export default function CustomSelect({
@@ -31,6 +32,7 @@ export default function CustomSelect({
   prices,
   levels,
   onChange,
+  value,
 }: CustomSelectProps) {
   const options: IOption[] = [
     ...values.map((val) => {
@@ -39,6 +41,10 @@ export default function CustomSelect({
   ];
 
   const [currentValue, setCurrentValue] = useState<IOption | null>(null);
+
+  useEffect(() => {
+    if (value === null) setCurrentValue(null);
+  }, [value]);
 
   function changeLanguage(newValue: SingleValue<IOption>) {
     setCurrentValue(newValue);

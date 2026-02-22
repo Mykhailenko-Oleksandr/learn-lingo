@@ -5,3 +5,22 @@
 
   margin-bottom: 32px;
 }
+
+.resetBtn {
+  background-color: transparent;
+  border: none;
+
+  font-weight: 500;
+  font-size: 18px;
+
+  transition: transform 300ms ease;
+
+  &:hover,
+  &:focus {
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(1);
+  }
+}
