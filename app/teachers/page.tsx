@@ -10,8 +10,8 @@ export default async function Teachers() {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchInfiniteQuery({
-    queryKey: ["teachers", null],
-    queryFn: ({ pageParam }) => getTeachers(4, pageParam, null),
+    queryKey: ["teachers", null, null, null],
+    queryFn: ({ pageParam }) => getTeachers(4, pageParam, null, null, null),
     initialPageParam: undefined,
   });
 

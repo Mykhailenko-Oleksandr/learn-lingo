@@ -16,9 +16,13 @@ import clsx from "clsx";
 
 interface TeacherCardProps {
   teacher: Teacher;
+  currentLevel: string | null;
 }
 
-export default function TeacherCard({ teacher }: TeacherCardProps) {
+export default function TeacherCard({
+  teacher,
+  currentLevel,
+}: TeacherCardProps) {
   const [isOpenReadMore, setIsOpenReadMore] = useState(false);
   const [isModalBooking, setIsModalBooking] = useState(false);
   const { isAuthenticated, user } = useAuthStore();
@@ -26,7 +30,6 @@ export default function TeacherCard({ teacher }: TeacherCardProps) {
     state.favoriteTeachers.includes(teacher.id!),
   );
   const { removeFavoriteStore, addFavoriteStore } = useFavoriteTeachers();
-  console.log(isFavorite);
 
   async function handleFavoriteBtn() {
     if (!isAuthenticated) {
@@ -142,7 +145,7 @@ export default function TeacherCard({ teacher }: TeacherCardProps) {
           )}
 
           {teacher.levels && teacher.levels.length > 0 && (
-            <BadgesList levels={teacher.levels} />
+            <BadgesList levels={teacher.levels} currentLevel={currentLevel} />
           )}
 
           {isOpenReadMore && (

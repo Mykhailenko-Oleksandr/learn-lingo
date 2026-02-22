@@ -1,36 +1,26 @@
 "use client";
 
-import Button from "@/components/Button/Button";
-import css from "./Teachers.module.css";
+import { useState } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { Teacher } from "@/types/teacher";
+import { getTeachers } from "@/lib/api/clientApi";
 import TeacherFilters from "@/components/TeacherFilters/TeacherFilters";
 import TeachersList from "@/components/TeachersList/TeachersList";
-import { getTeachers } from "@/lib/api/clientApi";
-import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { Teacher } from "@/types/teacher";
+import Button from "@/components/Button/Button";
+import css from "./Teachers.module.css";
 
 export default function TeachersClient() {
   const [languagesFilter, setLanguagesFilter] = useState<string | null>(null);
   const [levelsFilter, setLevelsFilter] = useState<string | null>(null);
   const [pricesFilter, setPricesFilter] = useState<string | null>(null);
 
-  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery<
-    Teacher[],
-    Error,
-    InfiniteData<Teacher[]>,
-    (string | null)[],
-    string | number | undefined
-  >({
-    queryKey: ["teachers", pricesFilter],
-    queryFn: ({ pageParam }) => getTeachers(4, pageParam, pricesFilter),
+  const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery({
+    queryKey: ["teachers", pricesFilter, languagesFilter, levelsFilter],
+    queryFn: ({ pageParam }: { pageParam?: string }) =>
+      getTeachers(4, pageParam, pricesFilter, languagesFilter, levelsFilter),
+    getNextPageParam: (lastPage) =>
+      lastPage.length ? lastPage[lastPage.length - 1].id : undefined,
     initialPageParam: undefined,
-    getNextPageParam: (lastPage) => {
-      if (lastPage.length < 4) return undefined;
-
-      return pricesFilter
-        ? lastPage[lastPage.length - 1].price_per_hour
-        : lastPage[lastPage.length - 1].id;
-    },
   });
 
   const teachers: Teacher[] = data?.pages.flatMap((page) => page) ?? [];
@@ -39,18 +29,20 @@ export default function TeachersClient() {
     <section className={css.section}>
       <div className={`container ${css.teachersContainer}`}>
         <TeacherFilters
-          changeLanguage={(value) => setLanguagesFilter(value)}
-          changeLevel={(value) => setLevelsFilter(value)}
-          changePrice={(value) => setPricesFilter(value)}
+          changeLanguage={setLanguagesFilter}
+          changeLevel={setLevelsFilter}
+          changePrice={setPricesFilter}
         />
 
-        {teachers && teachers.length > 0 ? (
-          <TeachersList teachers={teachers} />
+        {teachers.length > 0 ? (
+          <TeachersList teachers={teachers} currentLevel={levelsFilter} />
         ) : (
-          <p className={css.text}>No teachers found for the specified filter</p>
+          <p className={css.text}>No teachers found for selected filters.</p>
         )}
 
-        {hasNextPage && <Button text="Load More" onClick={fetchNextPage} />}
+        {hasNextPage && !isFetching && (
+          <Button text="Load More" onClick={() => fetchNextPage()} />
+        )}
       </div>
     </section>
   );

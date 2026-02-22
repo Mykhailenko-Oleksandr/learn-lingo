@@ -4,6 +4,9 @@ const LANGUAGES = [
   "German",
   "Ukrainian",
   "Polish",
+  "Spanish",
+  "Italian",
+  "Korean",
   "Mandarin Chinese",
 ];
 

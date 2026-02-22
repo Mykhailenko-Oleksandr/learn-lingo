@@ -1,15 +1,4 @@
-import {
-  endAt,
-  get,
-  limitToFirst,
-  orderByChild,
-  orderByKey,
-  query,
-  ref,
-  remove,
-  set,
-  startAfter,
-} from "firebase/database";
+import { get, ref, remove, set } from "firebase/database";
 import { nextServer } from "./api";
 import { auth, db } from "../firebase";
 import { Teacher } from "@/types/teacher";
@@ -22,48 +11,39 @@ import {
 
 export async function getTeachers(
   limitCount = 4,
-  lastValue?: number | string,
+  lastKey?: string,
   priceFilter?: string | null,
-) {
-  let teachersQuery;
-
-  if (priceFilter) {
-    const price = Number(priceFilter);
-
-    teachersQuery = lastValue
-      ? query(
-          ref(db, "teachers"),
-          orderByChild("price_per_hour"),
-          endAt(price),
-          startAfter(lastValue),
-          limitToFirst(limitCount),
-        )
-      : query(
-          ref(db, "teachers"),
-          orderByChild("price_per_hour"),
-          endAt(price),
-          limitToFirst(limitCount),
-        );
-  } else {
-    teachersQuery = lastValue
-      ? query(
-          ref(db, "teachers"),
-          orderByKey(),
-          startAfter(lastValue),
-          limitToFirst(limitCount),
-        )
-      : query(ref(db, "teachers"), orderByKey(), limitToFirst(limitCount));
-  }
-
-  const snapshot = await get(teachersQuery);
+  languageFilter?: string | null,
+  levelFilter?: string | null,
+): Promise<Teacher[]> {
+  const snapshot = await get(ref(db, "teachers"));
   if (!snapshot.exists()) return [];
 
-  const data = snapshot.val() ?? {};
-
-  return Object.entries(data).map(([id, teacher]) => ({
+  let teachers = Object.entries(snapshot.val()).map(([id, teacher]) => ({
     id,
     ...(teacher as Teacher),
   }));
+
+  if (priceFilter) {
+    teachers = teachers.filter((t) => t.price_per_hour == Number(priceFilter));
+  }
+
+  if (languageFilter) {
+    teachers = teachers.filter((t) => t.languages.includes(languageFilter));
+  }
+
+  if (levelFilter) {
+    teachers = teachers.filter((t) => t.levels.includes(levelFilter));
+  }
+
+  if (lastKey) {
+    const lastIndex = teachers.findIndex((t) => t.id === lastKey);
+    teachers = teachers.slice(lastIndex + 1, lastIndex + 1 + limitCount);
+  } else {
+    teachers = teachers.slice(0, limitCount);
+  }
+
+  return teachers;
 }
 
 export async function registerUser(

@@ -1,10 +1,15 @@
-import { Level } from "@/types/level";
+import clsx from "clsx";
 import css from "./BadgeItem.module.css";
 
 interface BadgeItemProps {
-  level: Level;
+  level: string;
+  currentLevel: string | null;
 }
 
-export default function BadgeItem({ level }: BadgeItemProps) {
-  return <li className={css.badge}>{level}</li>;
+export default function BadgeItem({ level, currentLevel }: BadgeItemProps) {
+  return (
+    <li className={clsx(css.badge, level === currentLevel && css.badgeAccent)}>
+      {level}
+    </li>
+  );
 }
