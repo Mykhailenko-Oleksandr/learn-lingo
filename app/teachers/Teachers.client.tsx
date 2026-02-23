@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { Teacher } from "@/types/teacher";
-import { getTeachers } from "@/lib/api/clientApi";
+import { getTeachers } from "@/lib/api/api";
 import TeacherFilters from "@/components/TeacherFilters/TeacherFilters";
 import TeachersList from "@/components/TeachersList/TeachersList";
 import Button from "@/components/Button/Button";

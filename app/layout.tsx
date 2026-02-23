@@ -18,10 +18,10 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "",
+  title: "Learn Lingo",
   description: "",
   openGraph: {
-    title: "",
+    title: "Learn Lingo",
     description: "",
     url: "https://",
     images: [{ url: "" }],

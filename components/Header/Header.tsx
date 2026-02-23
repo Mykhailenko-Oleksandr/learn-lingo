@@ -9,7 +9,7 @@ import { useState } from "react";
 import ModalLogin from "../ModalLogin/ModalLogin";
 import ModalRegister from "../ModalRegister/ModalRegister";
 import { useAuthStore } from "@/lib/store/authStore";
-import { logout } from "@/lib/api/clientApi";
+import { logout } from "@/lib/api/api";
 
 export default function Header() {
   const [isLoginModal, setIsLoginModal] = useState(false);

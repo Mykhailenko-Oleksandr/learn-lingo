@@ -3,12 +3,12 @@ import { getDatabase } from "firebase/database";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA-g80p7I3PnT4R766XnQw3jJvC9CnnawQ",
-  authDomain: "learn-lingo-150c6.firebaseapp.com",
-  projectId: "learn-lingo-150c6",
-  storageBucket: "learn-lingo-150c6.firebasestorage.app",
-  messagingSenderId: "1057017129990",
-  appId: "1:1057017129990:web:41ecb542d128bbf7c9a787",
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);

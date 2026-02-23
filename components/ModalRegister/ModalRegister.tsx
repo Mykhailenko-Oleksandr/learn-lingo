@@ -5,8 +5,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import clsx from "clsx";
-import { registerUser } from "@/lib/api/clientApi";
+import { registerUser } from "@/lib/api/api";
 import { useAuthStore } from "@/lib/store/authStore";
+import toast from "react-hot-toast";
 
 interface FormData {
   name: string;
@@ -57,11 +58,10 @@ export default function ModalRegister({ onClose }: ModalRegisterProps) {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     try {
       const user = await registerUser(data.email, data.password, data.name);
-      console.log("User registered:", user);
       setUser(user);
       onClose();
     } catch (error: unknown) {
-      console.error("Registration error");
+      toast.error("Email is already in use");
     }
   };
 

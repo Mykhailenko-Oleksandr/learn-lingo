@@ -5,8 +5,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import clsx from "clsx";
-import { loginUser } from "@/lib/api/clientApi";
+import { loginUser } from "@/lib/api/api";
 import { useAuthStore } from "@/lib/store/authStore";
+import toast from "react-hot-toast";
 
 interface FormData {
   email: string;
@@ -40,11 +41,10 @@ export default function ModalLogin({ onClose }: ModalLoginProps) {
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     try {
       const user = await loginUser(data.email, data.password);
-      console.log("User login:", user);
       setUser(user);
       onClose();
     } catch (error: unknown) {
-      console.log("Login error");
+      toast.error("Invalid email or password");
     }
   };
 

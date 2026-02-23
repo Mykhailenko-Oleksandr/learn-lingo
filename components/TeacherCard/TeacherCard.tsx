@@ -11,7 +11,7 @@ import Button from "../Button/Button";
 import ModalBooking from "../ModalBooking/ModalBooking";
 import { useAuthStore } from "@/lib/store/authStore";
 import toast from "react-hot-toast";
-import { addFavorite, removeFavorite } from "@/lib/api/clientApi";
+import { addFavorite, removeFavorite } from "@/lib/api/api";
 import clsx from "clsx";
 
 interface TeacherCardProps {

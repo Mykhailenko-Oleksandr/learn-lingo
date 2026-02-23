@@ -4,7 +4,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import TeachersClient from "./Teachers.client";
-import { getTeachers } from "@/lib/api/clientApi";
+import { getTeachers } from "@/lib/api/api";
 
 export default async function Teachers() {
   const queryClient = new QueryClient();

@@ -5,7 +5,7 @@ import { useAuthStore } from "@/lib/store/authStore";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import Loader from "../Loader/Loader";
-import { getUserFavorites } from "@/lib/api/clientApi";
+import { getUserFavorites } from "@/lib/api/api";
 import { useFavoriteTeachers } from "@/lib/store/teachersFavoriteStore";
 
 type Props = {
