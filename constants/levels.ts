@@ -1,6 +1,4 @@
-import { Level } from "@/types/level";
-
-const LEVELS: Level[] = [
+const LEVELS: string[] = [
   "A1 Beginner",
   "A2 Elementary",
   "B1 Intermediate",
