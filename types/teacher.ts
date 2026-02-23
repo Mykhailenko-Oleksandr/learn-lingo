@@ -1,4 +1,3 @@
-import { Level } from "./level";
 import { Review } from "./review";
 
 export interface Teacher {
