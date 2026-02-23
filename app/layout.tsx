@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     title: "Learn Lingo – Language Learning Platform",
     description:
       "Discover experienced teachers, flexible lessons, and personalized learning with Learn Lingo.",
-    url: "https://learn-lingo-orcin-kappa.vercel.app/",
+    url: "https://learn-lingo-orcin-kappa.vercel.app",
     images: [{ url: "/images/head.png" }],
   },
 };
