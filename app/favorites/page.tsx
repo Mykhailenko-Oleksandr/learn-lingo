@@ -1,60 +1,19 @@
-"use client";
+import { Metadata } from "next";
+import FavoritesClient from "./Favorites.client";
 
-import { useEffect, useState } from "react";
-import { useFavoriteTeachers } from "@/lib/store/teachersFavoriteStore";
-import { get, ref } from "firebase/database";
-import { db } from "@/lib/firebase";
-import { Teacher } from "@/types/teacher";
-
-import css from "./Favorites.module.css";
-import { useAuthStore } from "@/lib/store/authStore";
-import { useRouter } from "next/navigation";
-import TeachersList from "@/components/TeachersList/TeachersList";
+export const metadata: Metadata = {
+  title: "Favorites",
+  description:
+    "View and manage your favorite language teachers. Quickly access saved profiles and book lessons with ease on Learn Lingo.",
+  openGraph: {
+    title: "Learn Lingo – Your Favorite Teachers",
+    description:
+      "Keep track of your saved teachers, compare their profiles, and continue your learning journey with Learn Lingo.",
+    url: "https://learn-lingo-orcin-kappa.vercel.app/favorites",
+    images: [{ url: "/images/head.png" }],
+  },
+};
 
 export default function Favorites() {
-  const router = useRouter();
-  const [teachers, setTeachers] = useState<Teacher[]>([]);
-  const favoriteTeacherIds = useFavoriteTeachers(
-    (state) => state.favoriteTeachers,
-  );
-  const { user, isAuthenticated } = useAuthStore();
-
-  if (!isAuthenticated) {
-    router.back();
-  }
-
-  useEffect(() => {
-    if (!user || favoriteTeacherIds.length === 0) {
-      setTeachers([]);
-      return;
-    }
-
-    async function fetchFavorites() {
-      const results = await Promise.all(
-        favoriteTeacherIds.map(async (id) => {
-          const snapshot = await get(ref(db, `teachers/${id}`));
-          if (snapshot.exists()) {
-            return { id, ...(snapshot.val() as Teacher) };
-          }
-          return null;
-        }),
-      );
-
-      setTeachers(results.filter(Boolean) as Teacher[]);
-    }
-
-    fetchFavorites();
-  }, [user, favoriteTeacherIds]);
-
-  return (
-    <section className={css.section}>
-      <div className={`container ${css.teachersContainer}`}>
-        {teachers && teachers.length > 0 ? (
-          <TeachersList teachers={teachers} currentLevel={null} />
-        ) : (
-          <p className={css.text}>You have no favorite teachers yet</p>
-        )}
-      </div>
-    </section>
-  );
+  return <FavoritesClient />;
 }
