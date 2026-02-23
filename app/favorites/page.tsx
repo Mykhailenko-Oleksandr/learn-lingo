@@ -50,7 +50,7 @@ export default function Favorites() {
     <section className={css.section}>
       <div className={`container ${css.teachersContainer}`}>
         {teachers && teachers.length > 0 ? (
-          <TeachersList teachers={teachers} />
+          <TeachersList teachers={teachers} currentLevel={null} />
         ) : (
           <p className={css.text}>You have no favorite teachers yet</p>
         )}
