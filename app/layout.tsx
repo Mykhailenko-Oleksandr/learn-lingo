@@ -19,12 +19,14 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: "Learn Lingo",
-  description: "",
+  description:
+    "Find the best language teachers, book lessons, and improve your skills with Learn Lingo.",
   openGraph: {
-    title: "Learn Lingo",
-    description: "",
-    url: "https://",
-    images: [{ url: "" }],
+    title: "Learn Lingo – Language Learning Platform",
+    description:
+      "Discover experienced teachers, flexible lessons, and personalized learning with Learn Lingo.",
+    url: "https://learn-lingo-orcin-kappa.vercel.app/",
+    images: [{ url: "/images/head.png" }],
   },
 };
 
