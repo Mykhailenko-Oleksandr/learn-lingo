@@ -13,13 +13,15 @@
 
   display: flex;
   flex-direction: column;
-  align-items: center;
 
-  max-width: 566px;
+  max-width: 600px;
+  max-height: 90vh;
   margin: 0 auto;
   padding: 64px;
   background-color: var(--color-background);
   border-radius: 30px;
+
+  overflow-y: auto;
 }
 
 .closeBtn {
@@ -46,11 +48,141 @@
 }
 
 .title {
-  align-self: start;
-
   font-weight: 500;
   font-size: 40px;
   line-height: 1.2;
   letter-spacing: -0.02em;
   margin-bottom: 20px;
+}
+
+.text {
+  line-height: 1.38;
+  color: rgba(18, 20, 23, 0.8);
+
+  margin-bottom: 20px;
+}
+
+.teacherInfoBox {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  margin-bottom: 40px;
+}
+
+.img {
+  border-radius: 50%;
+}
+
+.teacherNameBox {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.teacherNameLabel {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  color: var(--color-disable);
+}
+
+.teacherName {
+  font-weight: 500;
+}
+
+.legend {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.33;
+
+  margin-bottom: 20px;
+}
+
+.fieldsetRadio {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+
+  position: relative;
+  width: 100%;
+
+  margin-bottom: 40px;
+}
+
+.radioBtn {
+  appearance: none;
+  cursor: pointer;
+  position: relative;
+
+  width: 20px;
+  height: 20px;
+
+  border: 2px solid rgba(18, 20, 23, 0.2);
+  border-radius: 50%;
+
+  &:checked {
+    border-color: var(--color-basic-accent);
+  }
+}
+
+.radioBtn:checked::after {
+  content: "";
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+  background-color: var(--color-basic-accent);
+}
+
+.labelRadio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+
+  line-height: 1.38;
+}
+
+.fieldsetInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  margin-bottom: 40px;
+}
+
+.inputBox {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.input {
+  outline: none;
+  border: 1px solid rgba(18, 20, 23, 0.1);
+  border-radius: 12px;
+  padding: 15px 17px;
+  width: 100%;
+
+  line-height: 1.38;
+
+  &::placeholder {
+    color: var(--color-text);
+  }
+}
+
+.errorText {
+  position: absolute;
+  top: 100%;
+  left: 10px;
+  color: red;
+
+  font-size: 12px;
 }

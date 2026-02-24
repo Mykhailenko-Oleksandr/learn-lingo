@@ -18,6 +18,10 @@
     margin-top: 32px;
   }
 
+  &.submitBtn {
+    width: 100%;
+  }
+
   &:hover,
   &:focus {
     background-color: var(--color-basic-second);
@@ -25,5 +29,10 @@
 
   &:active {
     background-color: var(--color-green-muted);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: var(--color-grey);
   }
 }

@@ -13,6 +13,8 @@ import { useAuthStore } from "@/lib/store/authStore";
 import toast from "react-hot-toast";
 import { addFavorite, removeFavorite } from "@/lib/api/api";
 import clsx from "clsx";
+import ModalSuccess from "../ModalSuccess/ModalSuccess";
+import FormData from "@/types/formDataBooking";
 
 interface TeacherCardProps {
   teacher: Teacher;
@@ -25,6 +27,8 @@ export default function TeacherCard({
 }: TeacherCardProps) {
   const [isOpenReadMore, setIsOpenReadMore] = useState(false);
   const [isModalBooking, setIsModalBooking] = useState(false);
+  const [isModalSuccess, setIsModalSuccess] = useState(false);
+  const [formData, setFormData] = useState<FormData | null>(null);
   const { isAuthenticated, user } = useAuthStore();
   const isFavorite = useFavoriteTeachers((state) =>
     state.favoriteTeachers.includes(teacher.id!),
@@ -153,13 +157,27 @@ export default function TeacherCard({
               text="Book trial lesson"
               teacherCard
               onClick={() => setIsModalBooking(true)}
+              type="button"
             />
           )}
         </div>
       </li>
 
       {isModalBooking && (
-        <ModalBooking onClose={() => setIsModalBooking(false)} />
+        <ModalBooking
+          onClose={() => setIsModalBooking(false)}
+          teacher={teacher}
+          openModalSuccess={() => setIsModalSuccess(true)}
+          setFormData={(data) => setFormData(data)}
+        />
+      )}
+
+      {isModalSuccess && formData && (
+        <ModalSuccess
+          onClose={() => setIsModalSuccess(false)}
+          teacher={teacher}
+          formData={formData}
+        />
       )}
     </>
   );

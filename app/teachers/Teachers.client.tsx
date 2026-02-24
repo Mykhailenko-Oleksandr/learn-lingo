@@ -41,7 +41,11 @@ export default function TeachersClient() {
         )}
 
         {hasNextPage && !isFetching && (
-          <Button text="Load More" onClick={() => fetchNextPage()} />
+          <Button
+            text="Load More"
+            onClick={() => fetchNextPage()}
+            type="button"
+          />
         )}
       </div>
     </section>

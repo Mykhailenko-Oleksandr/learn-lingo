@@ -1,0 +1,67 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  max-width: 600px;
+  max-height: 90vh;
+  margin: 0 auto;
+  padding: 64px;
+  background-color: var(--color-background);
+  border-radius: 30px;
+
+  overflow-y: auto;
+}
+
+.closeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  background-color: transparent;
+  border: none;
+
+  transition: transform 600ms ease;
+
+  & svg {
+    stroke: var(--color-text);
+  }
+
+  &:hover {
+    transform: rotate(90deg) scale(1.2);
+  }
+}
+
+.title {
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+
+.text {
+  line-height: 1.38;
+  color: rgba(18, 20, 23, 0.8);
+
+  margin-bottom: 20px;
+}
+
+.accentText {
+  font-weight: 500;
+}

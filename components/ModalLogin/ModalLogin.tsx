@@ -8,6 +8,7 @@ import clsx from "clsx";
 import { loginUser } from "@/lib/api/api";
 import { useAuthStore } from "@/lib/store/authStore";
 import toast from "react-hot-toast";
+import Button from "../Button/Button";
 
 interface FormData {
   email: string;
@@ -120,9 +121,7 @@ export default function ModalLogin({ onClose }: ModalLoginProps) {
               <span className={css.errorText}>{errors.password?.message}</span>
             )}
           </div>
-          <button type="submit" className={css.btnSubmit} disabled={!isValid}>
-            Log In
-          </button>
+          <Button type="submit" text="Log In" disable={!isValid} />
         </form>
       </div>
     </div>,

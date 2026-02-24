@@ -8,6 +8,7 @@ import clsx from "clsx";
 import { registerUser } from "@/lib/api/api";
 import { useAuthStore } from "@/lib/store/authStore";
 import toast from "react-hot-toast";
+import Button from "../Button/Button";
 
 interface FormData {
   name: string;
@@ -133,9 +134,7 @@ export default function ModalRegister({ onClose }: ModalRegisterProps) {
               <span className={css.errorText}>{errors.password?.message}</span>
             )}
           </div>
-          <button type="submit" className={css.btnSubmit} disabled={!isValid}>
-            Sign Up
-          </button>
+          <Button type="submit" text="Sign Up" disable={!isValid} />
         </form>
       </div>
     </div>,
