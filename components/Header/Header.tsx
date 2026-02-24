@@ -10,16 +10,19 @@ import ModalLogin from "../ModalLogin/ModalLogin";
 import ModalRegister from "../ModalRegister/ModalRegister";
 import { useAuthStore } from "@/lib/store/authStore";
 import { logout } from "@/lib/api/api";
+import { useFavoriteTeachers } from "@/lib/store/teachersFavoriteStore";
 
 export default function Header() {
   const [isLoginModal, setIsLoginModal] = useState(false);
   const [isRegisterModal, setIsRegisterModal] = useState(false);
   const { user, isAuthenticated, clearIsAuthenticated } = useAuthStore();
+  const clearFavorites = useFavoriteTeachers((state) => state.clearFavorites);
   const router = usePathname();
 
   async function logoutUser() {
     await logout();
     clearIsAuthenticated();
+    clearFavorites();
   }
 
   return (

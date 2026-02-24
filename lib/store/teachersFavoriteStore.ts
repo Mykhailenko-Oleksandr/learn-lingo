@@ -7,6 +7,7 @@ interface FavoriteTeachersState {
   addFavoriteStore: (id: string) => void;
   removeFavoriteStore: (id: string) => void;
   isFavorite: (id: string) => boolean;
+  clearFavorites: () => void;
 }
 
 export const useFavoriteTeachers = create<FavoriteTeachersState>(
@@ -28,5 +29,6 @@ export const useFavoriteTeachers = create<FavoriteTeachersState>(
       })),
 
     isFavorite: (id) => get().favoriteTeachers.includes(id),
+    clearFavorites: () => set(() => ({ favoriteTeachers: [] })),
   }),
 );
